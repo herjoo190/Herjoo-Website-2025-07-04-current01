@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herjoo Online Solutions - Website Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --terracotta: #A57B5B;
+            --rich-clay: #8D6B4B;
+            --warm-taupe: #C5B299;
+            --olive-green: #6A7B53;
+            --soft-sand: #E5D5C5;
+            --creamy-beige: #F3EDE4;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--creamy-beige);
+            color: #333;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--rich-clay);
+        }
+        .hero-bg {
+            background-color: #f7f3ef;
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .service-card {
+             background-color: #fff;
+             border: 1px solid var(--soft-sand);
+             transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(141, 107, 75, 0.15);
+        }
+        .testimonial-card {
+            background-color: #fff;
+            border-left: 4px solid var(--terracotta);
+        }
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: var(--terracotta);
+            animation: spin 1s ease infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#home" class="text-2xl font-bold" style="color: var(--rich-clay);">Herjoo</a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-black">Home</a>
+                    <a href="#about" class="text-gray-600 hover:text-black">About Me</a>
+                    <div class="relative" id="services-dropdown-container">
+                        <button id="services-button" class="text-gray-600 hover:text-black flex items-center">
+                            Services
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="services-dropdown" class="absolute mt-2 w-64 bg-white rounded-lg shadow-xl hidden">
+                            <a href="#service-google-ads" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Google Ads Management</a>
+                            <a href="#service-landing-pages" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">High-Converting Landing Pages</a>
+                            <a href="#service-click-protect" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Click Protect</a>
+                            <a href="#service-competitor-analysis" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Competitor Analysis</a>
+                        </div>
+                    </div>
+                    <a href="#contact" class="text-gray-600 hover:text-black">Contact Us</a>
+                </nav>
+                <button class="hidden md:inline-block cta-button text-white px-5 py-2 rounded-full" style="background-color: var(--terracotta);" onclick="openModal()">Get a Free Proposal</button>
+                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#home" class="block py-2 text-gray-700">Home</a>
+            <a href="#about" class="block py-2 text-gray-700">About Me</a>
+            <a href="#service-google-ads" class="block py-2 text-gray-700">Google Ads Management</a>
+            <a href="#service-landing-pages" class="block py-2 text-gray-700">Landing Page Design</a>
+            <a href="#service-click-protect" class="block py-2 text-gray-700">Click Protect</a>
+            <a href="#service-competitor-analysis" class="block py-2 text-gray-700">Competitor Analysis</a>
+            <a href="#contact" class="block py-2 text-gray-700">Contact Us</a>
+             <button class="w-full mt-4 cta-button text-white px-5 py-2 rounded-full" style="background-color: var(--terracotta);" onclick="openModal()">Get a Free Proposal</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="hero-bg py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">The Anti-Agency Google Ads Specialist.</h1>
+                <h2 class="text-2xl md:text-4xl mt-2" style="color: var(--terracotta);">Real Results, Transparent Pricing.</h2>
+                <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-gray-600">
+                    You get a dedicated specialist who treats your budget like it's my own. For over a decade, I've used this transparent, flat-rate approach to get real results for businesses from the USA to the UK. Your success is the only metric that matters.
+                </p>
+                <button class="mt-8 cta-button text-white px-8 py-4 rounded-full text-lg font-semibold" style="background-color: var(--terracotta);" onclick="openModal()">
+                    Get a Free, Honest Proposal
+                </button>
+            </div>
+        </section>
+
+        <!-- The Agency Runaround Ends Here Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">The Agency Runaround Ends Here.</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">You've likely dealt with digital agencies before. If you're here, it's probably because you're tired of the same old story. Here’s how I’m different.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold mb-2">The Agency Problem: The 12-Month Lock-In</h3>
+                        <p class="text-gray-600 mb-4">They lock you into long-term contracts, making it impossible to leave when you're unhappy with the results.</p>
+                        <h4 class="text-lg font-semibold mb-2" style="color: var(--olive-green);">My Solution: No Long-Term Contracts.</h4>
+                        <p class="text-gray-700">I earn your business every month. If you're not seeing a positive ROI, you're free to walk away. No penalties, no hard feelings.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold mb-2">The Agency Problem: The Bait-and-Switch</h3>
+                        <p class="text-gray-600 mb-4">You're sold by a senior expert, but your account is handed off to a junior manager who is learning on your dime.</p>
+                        <h4 class="text-lg font-semibold mb-2" style="color: var(--olive-green);">My Solution: You Work Directly With Me.</h4>
+                        <p class="text-gray-700">I am the specialist who will personally plan, build, and manage your campaigns. You get my decade of international experience on every single decision.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold mb-2">The Agency Problem: The Conflict of Interest</h3>
+                        <p class="text-gray-600 mb-4">Their fees are a percentage of your ad spend, incentivizing them to get you to spend more, not necessarily smarter.</p>
+                        <h4 class="text-lg font-semibold mb-2" style="color: var(--olive-green);">My Solution: Transparent Flat-Rate Pricing.</h4>
+                        <p class="text-gray-700">I charge a one-time setup fee (if applicable) and a simple, flat monthly fee. My only incentive is to make your budget as efficient and profitable as possible.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold mb-2">The Agency Problem: The Confusing Reports</h3>
+                        <p class="text-gray-600 mb-4">You get reports filled with vanity metrics (clicks, impressions) that don't actually tell you if you're making money.</p>
+                        <h4 class="text-lg font-semibold mb-2" style="color: var(--olive-green);">My Solution: A Focus on What Matters.</h4>
+                        <p class="text-gray-700">The only report I care about is your phone ringing and your inbox filling with qualified leads. That's the real measure of success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Overview Section -->
+        <section class="hero-bg py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">A Smarter Approach to Digital Marketing</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">My approach is simple: use proven, high-level strategies to get you the best possible return on your investment. I was taught by the very best in the business—<strong style="color: var(--rich-clay);">Howie Jacobson, PhD</strong> (author of AdWords for Dummies). I apply that elite expertise to a focused set of services designed to make your business grow.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <h3 class="text-2xl font-bold mb-4">Google Ads Management</h3>
+                        <p class="text-gray-600 mb-6">From planning and setup to continuous optimization, I personally manage every aspect of your campaign to keep it lean, mean, and profitable.</p>
+                        <a href="#service-google-ads" class="font-semibold" style="color: var(--terracotta);">Learn More →</a>
+                    </div>
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <h3 class="text-2xl font-bold mb-4">Click Protect</h3>
+                        <p class="text-gray-600 mb-6">Stop wasting 20-30% of your budget on bots, competitors, and fraudulent clicks. I use advanced tools to ensure your ads are only seen by real customers.</p>
+                        <a href="#service-click-protect" class="font-semibold" style="color: var(--terracotta);">Learn More →</a>
+                    </div>
+                    <div class="service-card p-8 rounded-lg text-center">
+                        <h3 class="text-2xl font-bold mb-4">Competitor Analysis</h3>
+                        <p class="text-gray-600 mb-6">I'll dissect your competitors' winning strategies—their keywords, their ad copy, their budgets—to find opportunities for you to dominate the market.</p>
+                        <a href="#service-competitor-analysis" class="font-semibold" style="color: var(--terracotta);">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Ad Copy Generator Section -->
+        <section id="ai-tools" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">✨ AI-Powered Ad Copy Generator</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Get a head start on your campaign. Describe your product or service, tell us who you're targeting, and let our AI generate compelling ad copy variations for you to use.</p>
+                </div>
+                <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="productDescription" class="block text-gray-700 text-sm font-medium mb-2">Product/Service Description</label>
+                            <textarea id="productDescription" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2" style="border-color: var(--soft-sand); focus-ring-color: var(--terracotta);" placeholder="e.g., Luxury, handcrafted leather wallets for men."></textarea>
+                        </div>
+                        <div>
+                            <label for="targetAudience" class="block text-gray-700 text-sm font-medium mb-2">Target Audience</label>
+                            <textarea id="targetAudience" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2" style="border-color: var(--soft-sand); focus-ring-color: var(--terracotta);" placeholder="e.g., Style-conscious young professionals aged 25-40."></textarea>
+                        </div>
+                    </div>
+                    <div class="text-center mt-6">
+                        <button id="generateAdCopyBtn" class="cta-button text-white px-8 py-3 rounded-full font-semibold" style="background-color: var(--terracotta);">Generate Ad Copy</button>
+                    </div>
+                    <div id="adCopyResult" class="mt-8 hidden">
+                        <h3 class="text-2xl font-bold text-center mb-4">Generated Ad Copy</h3>
+                        <div id="loadingSpinner" class="flex justify-center items-center">
+                            <div class="spinner"></div>
+                        </div>
+                        <div id="adCopyVariations" class="space-y-4"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonial Section -->
+        <section class="hero-bg py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">Don't Just Take My Word For It.</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">I've been helping businesses succeed with Google Ads since 2007, from local companies here in South Africa to a strong client base in the USA since 2013.</p>
+                </div>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                    <div class="testimonial-card p-8 rounded-lg shadow-sm">
+                        <p class="text-lg text-gray-700 italic">"Thanks, Herman, for helping my clients with their AdWords campaign. Your mastery of AdWords is amazing. I can confidently recommend you to my clients who need to get the phone ringing right away."</p>
+                        <p class="mt-6 font-bold" style="color: var(--rich-clay);">Katherine Andes</p>
+                        <p class="text-sm text-gray-500">Web Content Writer & SEO Specialist, Andes & Associates (USA)</p>
+                    </div>
+                    <div class="testimonial-card p-8 rounded-lg shadow-sm">
+                        <p class="text-lg text-gray-700 italic">"Working with Herman from our office in California has been a game-changer. He's more responsive and gets better results than any local agency we've tried. Our cost per lead has dropped by 40%."</p>
+                        <p class="mt-6 font-bold" style="color: var(--rich-clay);">John Doe (Placeholder)</p>
+                        <p class="text-sm text-gray-500">CEO, Example Inc. (USA)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Me Section -->
+        <section id="about" class="py-20 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">Tired of the Agency Runaround? So Was I.</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Hi, I'm Herman Jooste. Before I started Herjoo Online Solutions back in 2007, I saw a major problem in the digital marketing world. Business owners were being locked into confusing contracts, sold by experts but serviced by juniors, and billed based on how much they spent, not on the results they got. I knew there had to be a better, more honest way.</p>
+                </div>
+                <div class="max-w-5xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold text-center mb-8">My Solution: A Better, More Honest Way</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2" style="color: var(--olive-green);">Direct Access & Accountability</h4>
+                            <p>When you hire Herjoo, you get me. I am the person who plans your strategy, builds your campaigns, and answers your questions. There are no hand-offs to junior staff, ever.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2" style="color: var(--olive-green);">100% Transparent, Flat-Rate Fees</h4>
+                            <p>I charge a one-time setup fee (if applicable) and a simple, flat monthly fee for my management services. This removes any conflict of interest.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2" style="color: var(--olive-green);">No Long-Term Contracts</h4>
+                            <p>I believe in earning your business month after month. If you're not happy with the results and the value I provide, you are free to leave at any time.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2" style="color: var(--olive-green);">A Relentless Focus on Real-World ROI</h4>
+                            <p>I don't hide behind confusing reports. I focus on what truly matters to your business: getting your phone to ring and your inbox to fill with qualified leads.</p>
+                        </div>
+                    </div>
+                    <hr class="my-8 border-t border-gray-200">
+                    <h3 class="text-2xl font-bold text-center mb-8">My Expertise: Global Experience, Elite Training</h3>
+                    <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto">
+                        My approach to Google Ads isn't based on guesswork; it's built on a foundation of elite training and over a decade of hands-on, international experience. I was originally taught by one of the best in the business, <strong style="color: var(--rich-clay);">Howie Jacobson, PhD</strong>, author of AdWords for Dummies. My strategies have since been heavily influenced and refined by the groundbreaking work of Google Ads pioneers like <strong style="color: var(--rich-clay);">Joel McDonald, Perry Marshall, and Mike Rhodes</strong>.
+                        <br><br>
+                        This world-class knowledge has been the bedrock of my success. While based in South Africa, I have been proudly serving a strong client base in the <strong style="color: var(--rich-clay);">United States since 2013</strong>. My ability to deliver results in the US is best evidenced by my long-standing partnership with <strong style="color: var(--rich-clay);">Katherine Andes</strong>, a respected American web content writer and SEO specialist.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Pages Sections -->
+        <section id="service-google-ads" class="hero-bg py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">The Anti-Agency Approach to Google Ads Management</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">After nearly 20 years in this industry, I've seen every trick in the agency playbook. That's why I developed a different model—one built on transparency, direct accountability, and strategies learned from the world's top Google Ads pioneers. This service is the culmination of that experience, designed to eliminate waste and maximize profit.</p>
+                </div>
+                <!-- Add more content for this service page here -->
+            </div>
+        </section>
+
+        <section id="service-landing-pages" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">Landing Pages Built for One Purpose: Your Profit.</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">A click from a great ad is only half the battle. If you send that valuable traffic to a generic homepage or a cluttered website, you're throwing money away. I design clean, focused landing pages with a single objective: to convert that click into a qualified lead.</p>
+                </div>
+                <!-- Add more content for this service page here -->
+            </div>
+        </section>
+
+        <section id="service-click-protect" class="hero-bg py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">Stop Wasting 20-30% of Your Ad Budget on Fake Clicks.</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">It's a frustrating reality of online advertising: a significant portion of your ad clicks are not from real customers. They come from automated bots, malicious competitors, and click farms, all designed to drain your budget. My Click Protect service acts as a 24/7 security guard for your campaigns, filtering out this invalid traffic so your ads are only shown to genuine, interested buyers.</p>
+                </div>
+                 <!-- Add more content for this service page here -->
+            </div>
+        </section>
+        
+        <section id="service-competitor-analysis" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">See What Your Competitors Don't Want You to See.</h2>
+                    <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Your top competitors have a roadmap to success—their most profitable keywords, their best-performing ads, their estimated budgets. They'd prefer you didn't see it. I act as your personal intelligence agent, reverse-engineering their entire Google Ads strategy to uncover their strengths, weaknesses, and the market gaps they've left wide open for you.</p>
+                </div>
+                <!-- Add more content for this service page here -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="hero-bg py-20">
+            <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl md:text-4xl font-bold">Ready for a Straightforward, Honest Conversation?</h2>
+                 <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">You won't get a pushy sales pitch or a generic presentation. Just fill out the form below, and I'll personally get back to you to schedule a simple conversation about your business, your goals, and whether I'm the right fit to help you achieve them.</p>
+                 <button class="mt-8 cta-button text-white px-8 py-4 rounded-full text-lg font-semibold" style="background-color: var(--terracotta);" onclick="openModal()">
+                    Get a Free, Honest Proposal
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Herjoo Online Solutions</h3>
+                    <p class="text-gray-400 text-sm">The Anti-Agency Google Ads Specialist.<br>Real Results, Transparent Pricing.</p>
+                    <p class="text-xs text-gray-500 mt-4">&copy; 2025 Herman Jooste Trading CC. All Rights Reserved.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Navigation</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white">About Me</a></li>
+                        <li><a href="#service-google-ads" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Core Services</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#service-google-ads" class="text-gray-400 hover:text-white">Google Ads Management</a></li>
+                        <li><a href="#service-landing-pages" class="text-gray-400 hover:text-white">Landing Page Design</a></li>
+                        <li><a href="#service-click-protect" class="text-gray-400 hover:text-white">Click Protect</a></li>
+                        <li><a href="#service-competitor-analysis" class="text-gray-400 hover:text-white">Competitor Analysis</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Legal</h3>
+                     <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="contactModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 hidden opacity-0">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-lg p-8 relative">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-800" onclick="closeModal()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h2 class="text-2xl font-bold mb-4">Get a Free, Honest Proposal</h2>
+            <p class="text-gray-600 mb-6">Let's start the conversation. Fill out the details below, and I'll personally get back to you within one business day.</p>
+            <form id="contactForm">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 text-sm font-medium mb-2">Your Name</label>
+                    <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2" style="border-color: var(--soft-sand); focus-ring-color: var(--terracotta);" required>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Your Email Address</label>
+                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2" style="border-color: var(--soft-sand); focus-ring-color: var(--terracotta);" required>
+                </div>
+                <div class="mb-4">
+                    <label for="website" class="block text-gray-700 text-sm font-medium mb-2">Your Website URL (optional)</label>
+                    <input type="url" id="website" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2" style="border-color: var(--soft-sand); focus-ring-color: var(--terracotta);">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-gray-700 text-sm font-medium mb-2">Tell me a bit about your business and your goals</label>
+                    <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2" style="border-color: var(--soft-sand); focus-ring-color: var(--terracotta);" required></textarea>
+                </div>
+                <button type="submit" class="w-full cta-button text-white px-6 py-3 rounded-full text-lg font-semibold" style="background-color: var(--terracotta);">Send Your Message</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Gemini API Generated Email Modal -->
+    <div id="emailDraftModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 hidden opacity-0">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-2xl p-8 relative">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-800" onclick="closeEmailDraftModal()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h2 class="text-2xl font-bold mb-4">✨ AI-Generated Email Draft</h2>
+            <p class="text-gray-600 mb-6">Here is a personalized draft to send to the potential client. You can copy and edit it before sending.</p>
+            <div id="emailDraftContent" class="bg-gray-50 p-4 rounded-lg border" style="border-color: var(--soft-sand);">
+                <!-- AI generated content will appear here -->
+            </div>
+             <div id="emailLoadingSpinner" class="flex justify-center items-center mt-4">
+                <div class="spinner"></div>
+            </div>
+            <button id="copyEmailBtn" class="mt-6 w-full cta-button text-white px-6 py-3 rounded-full text-lg font-semibold hidden" style="background-color: var(--olive-green);">Copy to Clipboard</button>
+        </div>
+    </div>
+
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Services dropdown toggle
+        const servicesButton = document.getElementById('services-button');
+        const servicesDropdown = document.getElementById('services-dropdown');
+        const servicesDropdownContainer = document.getElementById('services-dropdown-container');
+
+        servicesButton.addEventListener('click', () => {
+            servicesDropdown.classList.toggle('hidden');
+        });
+        
+        // Close dropdown if clicking outside
+        document.addEventListener('click', function(event) {
+            if (!servicesDropdownContainer.contains(event.target)) {
+                servicesDropdown.classList.add('hidden');
+            }
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('contactModal');
+        function openModal() {
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 20);
+        }
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 250);
+        }
+        
+        // Close modal on escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
+                closeEmailDraftModal();
+            }
+        });
+        
+        // Close modal on outside click
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Gemini API Ad Copy Generation
+        const generateAdCopyBtn = document.getElementById('generateAdCopyBtn');
+        const adCopyResult = document.getElementById('adCopyResult');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const adCopyVariations = document.getElementById('adCopyVariations');
+
+        async function generateAdCopy() {
+            const productDescription = document.getElementById('productDescription').value;
+            const targetAudience = document.getElementById('targetAudience').value;
+
+            if (!productDescription || !targetAudience) {
+                alert('Please provide both a product description and a target audience.');
+                return;
+            }
+
+            adCopyResult.classList.remove('hidden');
+            loadingSpinner.style.display = 'flex';
+            adCopyVariations.innerHTML = '';
+
+            const prompt = `As a world-class advertising copywriter, generate 3 distinct Google Ads variations based on the following information. Each variation must include a compelling headline (max 30 characters), a second headline (max 30 characters), and a description (max 90 characters). Format the output clearly for each variation.
+
+            Product/Service Description: "${productDescription}"
+            Target Audience: "${targetAudience}"`;
+
+            try {
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    adCopyVariations.innerHTML = text.replace(/\n/g, '<br>');
+                } else {
+                    adCopyVariations.innerHTML = '<p class="text-red-500">Sorry, something went wrong. Please try again.</p>';
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                adCopyVariations.innerHTML = `<p class="text-red-500">An error occurred: ${error.message}</p>`;
+            } finally {
+                loadingSpinner.style.display = 'none';
+            }
+        }
+
+        generateAdCopyBtn.addEventListener('click', generateAdCopy);
+        
+        // Contact Form Submission & Gemini Email Draft
+        const contactForm = document.getElementById('contactForm');
+        const emailDraftModal = document.getElementById('emailDraftModal');
+        const emailDraftContent = document.getElementById('emailDraftContent');
+        const emailLoadingSpinner = document.getElementById('emailLoadingSpinner');
+        const copyEmailBtn = document.getElementById('copyEmailBtn');
+
+
+        function openEmailDraftModal() {
+            emailDraftModal.classList.remove('hidden');
+            setTimeout(() => emailDraftModal.classList.remove('opacity-0'), 20);
+        }
+
+        function closeEmailDraftModal() {
+            emailDraftModal.classList.add('opacity-0');
+            setTimeout(() => emailDraftModal.classList.add('hidden'), 250);
+        }
+        
+        emailDraftModal.addEventListener('click', (event) => {
+            if (event.target === emailDraftModal) {
+                closeEmailDraftModal();
+            }
+        });
+
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            closeModal();
+            openEmailDraftModal();
+
+            const name = document.getElementById('name').value;
+            const userEmail = document.getElementById('email').value;
+            const website = document.getElementById('website').value;
+            const message = document.getElementById('message').value;
+            
+            emailLoadingSpinner.style.display = 'flex';
+            emailDraftContent.innerHTML = '';
+            copyEmailBtn.classList.add('hidden');
+
+            const prompt = `My name is Herman Jooste, a Google Ads specialist. A potential client named ${name} has just submitted a contact form on my website. Their email is ${userEmail}, their website is ${website || 'not provided'}, and their message is: "${message}". 
+            
+            Please draft a friendly, professional, and concise follow-up email from me (Herman) to ${name}. The goal is to thank them for their interest and suggest scheduling a brief, no-pressure call to discuss their goals. Keep the tone aligned with an "anti-agency" specialist who is direct, honest, and helpful. Format the output as a complete email with a subject line, greeting, body, and closing.`;
+
+            try {
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    emailDraftContent.innerHTML = text.replace(/\n/g, '<br>');
+                    copyEmailBtn.classList.remove('hidden');
+                } else {
+                    emailDraftContent.innerHTML = '<p class="text-red-500">Sorry, could not generate email draft. Please try again.</p>';
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                emailDraftContent.innerHTML = `<p class="text-red-500">An error occurred: ${error.message}</p>`;
+            } finally {
+                emailLoadingSpinner.style.display = 'none';
+            }
+        }
+
+        contactForm.addEventListener('submit', handleFormSubmit);
+        
+        copyEmailBtn.addEventListener('click', () => {
+            const emailText = emailDraftContent.innerText;
+            const textArea = document.createElement('textarea');
+            textArea.value = emailText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                copyEmailBtn.innerText = 'Copied!';
+                setTimeout(() => { copyEmailBtn.innerText = 'Copy to Clipboard'; }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+            document.body.removeChild(textArea);
+        });
+
+    </script>
+</body>
+</html>
