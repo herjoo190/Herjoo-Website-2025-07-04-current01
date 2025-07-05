@@ -1,0 +1,24 @@
+{
+  "name": "herjoo-website-2025-07-04-current",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "tailwindcss": "^4.1.11"
+  },
+  "scripts": {
+    "build": "npx tailwindcss -i ./src/input.css -o ./assets/css/style.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/herjoo190/Herjoo-Website-2025-07-04-current01.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/herjoo190/Herjoo-Website-2025-07-04-current01/issues"
+  },
+  "homepage": "https://github.com/herjoo190/Herjoo-Website-2025-07-04-current01#readme",
+  "description": ""
+}
