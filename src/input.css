@@ -1,3 +1,52 @@
+/*
+  This file is the main input for Tailwind CSS.
+  These three lines are called "directives". They tell Tailwind to inject
+  all of its core styles, component classes, and utility classes into
+  your final stylesheet.
+*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+  You can also add your own custom CSS rules here.
+  For example, the terracotta-text class is defined below so that
+  Tailwind knows what color it corresponds to.
+*/
+.terracotta-text {
+  color: #E2725B; /* A common hex code for terracotta */
+}
+
+.rich-clay-text {
+    color: #8D6B4B; /* A rich, earthy brown */
+}
+
+.olive-green-text {
+    color: #556B2F; /* A classic olive green */
+}
+
+.terracotta-bg {
+    background-color: #E2725B;
+}
+
+.terracotta-focus-ring:focus {
+    --tw-ring-color: #E2725B;
+}
+
+.soft-sand-border {
+    border-color: #F3EDE4;
+}
+
+.hero-bg {
+    background-color: #F9F6F2; /* A very light, warm off-white */
+}
+
+.service-card {
+    background-color: #FFFFFF;
+    border: 1px solid #F3EDE4;
+}
+
+.testimonial-card {
+    background-color: #FFFFFF;
+    border: 1px solid #F3EDE4;
+}

@@ -2,11 +2,8 @@
   "name": "herjoo-website-2025-07-04-current",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {
-    "tailwindcss": "^4.1.11"
-  },
   "scripts": {
-    "build": "npx tailwindcss -i ./src/input.css -o ./assets/css/style.css",
+    "build": "tailwindcss -i ./src/input.css -o ./assets/css/style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +17,10 @@
     "url": "https://github.com/herjoo190/Herjoo-Website-2025-07-04-current01/issues"
   },
   "homepage": "https://github.com/herjoo190/Herjoo-Website-2025-07-04-current01#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11"
+  }
 }
