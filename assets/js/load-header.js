@@ -1,9 +1,14 @@
 // Function to load header into all pages
 function loadHeader() {
-    fetch('/header.html')
+    fetch('header.html')
         .then(response => response.text())
         .then(html => {
-            document.body.insertAdjacentHTML('afterbegin', html);
+            const headerPlaceholder = document.getElementById('header-placeholder');
+            if (headerPlaceholder) {
+                headerPlaceholder.innerHTML = html;
+            } else {
+                document.body.insertAdjacentHTML('afterbegin', html);
+            }
             
             // Initialize mobile menu functionality
             const mobileMenuButton = document.getElementById('mobile-menu-button');
