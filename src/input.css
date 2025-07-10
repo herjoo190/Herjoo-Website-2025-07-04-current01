@@ -1,12 +1,2 @@
 /* src/input.css */
 @unocss;
-
-/* Custom Colors */
-.dark-bg { background-color: #000033 }
-.dark-text { color: #000033 }
-.white-bg { background-color: #FFFFFF }
-.white-text { color: #FFFFFF }
-.blue-bg { background-color: #3366CC }
-.blue-text { color: #3366CC }
-.grey-bg { background-color: #CCCCCC }
-.grey-text { color: #CCCCCC }
