@@ -1,98 +1,86 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Mobile menu toggle
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    }
-
-    // Services dropdown toggle
-    const servicesButton = document.getElementById('services-button');
-    const servicesDropdown = document.getElementById('services-dropdown');
-    const servicesDropdownContainer = document.getElementById('services-dropdown-container');
-
-    if (servicesButton && servicesDropdown && servicesDropdownContainer) {
-        servicesButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent the document click listener from firing immediately
-            const isExpanded = servicesButton.getAttribute('aria-expanded') === 'true';
-            servicesButton.setAttribute('aria-expanded', !isExpanded);
-            servicesDropdown.classList.toggle('hidden');
-        });
-
-        // Close dropdown if clicking outside
-        document.addEventListener('click', (event) => {
-            if (!servicesDropdownContainer.contains(event.target)) {
-                servicesDropdown.classList.add('hidden');
-                servicesButton.setAttribute('aria-expanded', 'false');
-            }
-        });
-
-        // Close dropdown when a menu item is clicked
-        const serviceLinks = servicesDropdown.querySelectorAll('a');
-        serviceLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                servicesDropdown.classList.add('hidden');
-                servicesButton.setAttribute('aria-expanded', 'false');
-            });
-        });
-    }
-
-    // Modal functionality
-    const contactModal = document.getElementById('contactModal');
-    const openModalButtons = document.querySelectorAll('.open-modal-btn');
-    const closeModalButton = document.querySelector('.close-modal-btn');
-
-    function openModal() {
-        if (!contactModal) return;
-        contactModal.classList.remove('hidden');
-        setTimeout(() => contactModal.classList.remove('opacity-0'), 20);
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    }
-
-    function closeModal() {
-        if (!contactModal) return;
-        contactModal.classList.add('opacity-0');
-        setTimeout(() => {
-            contactModal.classList.add('hidden');
-            document.body.style.overflow = 'auto'; // Restore background scrolling
-        }, 250);
-    }
-
-    openModalButtons.forEach(btn => btn.addEventListener('click', openModal));
-    if (closeModalButton) {
-        closeModalButton.addEventListener('click', closeModal);
-    }
-
-    // Close modal on escape key
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && !contactModal.classList.contains('hidden')) {
-            closeModal();
+    // --- 1. COMPONENT LOADER ---
+    // Fetches HTML for components like the header and injects them into the page.
+    // It returns a Promise that resolves after the component is loaded.
+    const loadComponent = (url, placeholderId) => {
+        const placeholder = document.getElementById(placeholderId);
+        if (!placeholder) {
+            // Silently return if the placeholder doesn't exist on the current page.
+            return Promise.resolve();
         }
-    });
 
-    // Close modal on outside click
-    if (contactModal) {
-        contactModal.addEventListener('click', (event) => {
-            if (event.target === contactModal) {
+        return fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error(`Failed to load component: ${url}`);
+                return response.text();
+            })
+            .then(data => {
+                placeholder.innerHTML = data;
+            })
+            .catch(error => console.error(error));
+    };
+
+
+    // --- 2. INITIALIZATION FUNCTIONS ---
+    // These functions attach event listeners to elements.
+
+    const initializeHeaderMenu = () => {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    };
+
+    const initializeModals = () => {
+        const modal = document.getElementById('contactModal');
+        if (!modal) return;
+
+        const openModalButtons = document.querySelectorAll('.open-modal-btn');
+        const closeModalButtons = modal.querySelectorAll('.close-modal-btn');
+
+        const openModal = () => modal.classList.remove('hidden', 'opacity-0');
+        const closeModal = () => modal.classList.add('hidden', 'opacity-0');
+
+        openModalButtons.forEach(button => button.addEventListener('click', openModal));
+        closeModalButtons.forEach(button => button.addEventListener('click', closeModal));
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
                 closeModal();
             }
         });
-    }
+    };
+    
+    const initializeContactForm = () => {
+        const form = document.getElementById('contactForm');
+        if (!form) return;
 
-    // --- Contact Form Submission --- 
-    // The form submission logic has been removed from the frontend.
-    // It should be handled by a secure backend endpoint.
-    const contactForm = document.getElementById('contactForm');
-    if(contactForm) {
-        contactForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            // Here you would typically send the form data to a backend server
-            // For example: fetch('/api/contact', { method: 'POST', body: new FormData(contactForm) })
-            alert('Thank you for your message! This is a demo and the form is not connected to a backend.');
-            closeModal();
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real application, you would add validation and an AJAX call here.
+            // For this project, we'll just redirect to the thank-you page on submit.
+            window.location.href = 'thank-you.html';
         });
-    }
+    };
+
+
+    // --- 3. SCRIPT EXECUTION ---
+    // Load the header first. Once it's done, initialize all scripts.
+    // This ensures that elements from the header (like the menu button)
+    // exist in the DOM before we try to attach event listeners to them.
+    loadComponent('header.html', 'header-placeholder').then(() => {
+        initializeHeaderMenu();
+        initializeModals();
+        initializeContactForm();
+    });
+
 });
